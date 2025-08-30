@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nur Mobile - Premium Electronics & Smartphones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
+                },
+                colors: {
+                    background: "var(--background)",
+                    foreground: "var(--foreground)",
+                    card: {
+                        DEFAULT: "var(--card)",
+                        foreground: "var(--card-foreground)",
+                    },
+                    popover: {
+                        DEFAULT: "var(--popover)",
+                        foreground: "var(--popover-foreground)",
+                    },
+                    primary: {
+                        DEFAULT: "var(--primary)",
+                        foreground: "var(--primary-foreground)",
+                    },
+                    secondary: {
+                        DEFAULT: "var(--secondary)",
+                        foreground: "var(--secondary-foreground)",
+                    },
+                    muted: {
+                        DEFAULT: "var(--muted)",
+                        foreground: "var(--muted-foreground)",
+                    },
+                    accent: {
+                        DEFAULT: "var(--accent)",
+                        foreground: "var(--accent-foreground)",
+                    },
+                    destructive: {
+                        DEFAULT: "var(--destructive)",
+                        foreground: "var(--destructive-foreground)",
+                    },
+                    border: "var(--border)",
+                    input: "var(--input)",
+                    ring: "var(--ring)",
+                    chart: {
+                        "1": "var(--chart-1)",
+                        "2": "var(--chart-2)",
+                        "3": "var(--chart-3)",
+                        "4": "var(--chart-4)",
+                        "5": "var(--chart-5)",
+                    }
+                },
+                fontFamily: {
+                    sans: ["var(--font-sans)"],
+                    serif: ["var(--font-serif)"],
+                    mono: ["var(--font-mono)"],
+                }
+            },
+        }
+    };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --background: hsl(210 40% 98%);
+            --foreground: hsl(222.2 84% 4.9%);
+            --card: hsl(0 0% 100%);
+            --card-foreground: hsl(222.2 84% 4.9%);
+            --popover: hsl(0 0% 100%);
+            --popover-foreground: hsl(222.2 84% 4.9%);
+            --primary: hsl(215 89% 24%);
+            --primary-foreground: hsl(210 40% 98%);
+            --secondary: hsl(210 40% 96%);
+            --secondary-foreground: hsl(222.2 84% 4.9%);
+            --muted: hsl(210 40% 96%);
+            --muted-foreground: hsl(215.4 16.3% 46.9%);
+            --accent: hsl(43 96% 56%);
+            --accent-foreground: hsl(222.2 84% 4.9%);
+            --destructive: hsl(0 84.2% 60.2%);
+            --destructive-foreground: hsl(210 40% 98%);
+            --border: hsl(214.3 31.8% 91.4%);
+            --input: hsl(214.3 31.8% 91.4%);
+            --ring: hsl(215 89% 24%);
+            --chart-1: hsl(43 96% 56%);
+            --chart-2: hsl(215 89% 24%);
+            --chart-3: hsl(142 76% 36%);
+            --chart-4: hsl(0 84.2% 60.2%);
+            --chart-5: hsl(262 83% 58%);
+            --radius: 0.5rem;
+            --font-sans: "Inter", sans-serif;
+        }
+        
+        * {
+            font-family: var(--font-sans);
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, hsl(215 89% 24%) 0%, hsl(43 96% 56%) 100%);
+        }
+        
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-container {
+            min-height: 300px;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-hidden {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-foreground">
+    <!-- @COMPONENT: App [Main application container] -->
+    <div id="app" class="min-h-screen">
+        <!-- @COMPONENT: Navigation [Main navigation bar] -->
+        <nav class="bg-card border-b border-border shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <h1 class="text-2xl font-bold text-primary">Nur Mobile</h1>
+                        </div>
+                        <div class="hidden md:block ml-10">
+                            <div class="flex items-baseline space-x-4">
+                                <a href="#home" data-nav="home" class="nav-link text-primary border-b-2 border-primary px-3 py-2 text-sm font-medium">Home</a>
+                                <a href="#products" data-nav="products" class="nav-link text-muted-foreground hover:text-primary px-3 py-2 text-sm font-medium">Products</a>
+                                <a href="#about" data-nav="about" class="nav-link text-muted-foreground hover:text-primary px-3 py-2 text-sm font-medium">About</a>
+                                <a href="#contact" data-nav="contact" class="nav-link text-muted-foreground hover:text-primary px-3 py-2 text-sm font-medium">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="adminLoginBtn" class="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
+                            <i class="fas fa-user-shield mr-2"></i>Admin Login
+                        </button>
+                        <button class="md:hidden" id="mobileMenuBtn">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="hidden md:hidden bg-card border-t border-border">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#home" class="block px-3 py-2 text-primary font-medium">Home</a>
+                    <a href="#products" class="block px-3 py-2 text-muted-foreground">Products</a>
+                    <a href="#about" class="block px-3 py-2 text-muted-foreground">About</a>
+                    <a href="#contact" class="block px-3 py-2 text-muted-foreground">Contact</a>
+                </div>
+            </div>
+        </nav>
+        <!-- @END_COMPONENT: Navigation -->
+
+        <!-- @COMPONENT: MainContent [Public facing content] -->
+        <div id="publicContent">
+            <!-- @COMPONENT: HeroSection [Main hero banner] -->
+            <section id="home" class="gradient-bg text-primary-foreground py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                            Welcome to Nur Mobile
+                        </h1>
+                        <p class="text-xl md:text-2xl mb-8 opacity-90">
+                            Your trusted partner for premium smartphones and electronics
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <button class="bg-accent text-accent-foreground px-8 py-3 rounded-lg font-semibold hover:bg-accent/90 transition-colors">
+                                <i class="fas fa-mobile-alt mr-2"></i>Browse Products
+                            </button>
+                            <button class="border-2 border-primary-foreground text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary-foreground hover:text-primary transition-colors">
+                                <i class="fas fa-phone mr-2"></i>Contact Us
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- @END_COMPONENT: HeroSection -->
+
+            <!-- @COMPONENT: FeaturedProducts [Featured products showcase] -->
+            <section id="products" class="py-16 bg-background">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Featured Products</h2>
+                        <p class="text-muted-foreground text-lg">Discover our latest smartphones and electronics</p>
+                    </div>
+                    
+                    <!-- Product Categories Filter -->
+                    <div class="flex justify-center mb-8">
+                        <div class="flex space-x-2 bg-muted p-1 rounded-lg">
+                            <button class="category-filter active px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium" data-category="all">All</button>
+                            <button class="category-filter px-4 py-2 rounded-md text-muted-foreground hover:bg-background text-sm font-medium" data-category="smartphones">Smartphones</button>
+                            <button class="category-filter px-4 py-2 rounded-md text-muted-foreground hover:bg-background text-sm font-medium" data-category="tablets">Tablets</button>
+                            <button class="category-filter px-4 py-2 rounded-md text-muted-foreground hover:bg-background text-sm font-medium" data-category="accessories">Accessories</button>
+                        </div>
+                    </div>
+
+                    <!-- @MAP: products.map(product => ( -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="productsGrid">
+                        <!-- Product Card 1 -->
+                        <div class="product-card bg-card rounded-lg shadow-md hover-lift overflow-hidden" data-category="smartphones">
+                            <!-- Modern iPhone with sleek design -->
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="iPhone 15 Pro" class="w-full h-48 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-foreground mb-2" data-bind="product.name">iPhone 15 Pro</h3>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="product.description">Latest iPhone with A17 Pro chip, titanium design, and advanced camera system</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xl font-bold text-primary" data-bind="product.price">45,000 ETB</span>
+                                    <span class="text-xs bg-accent/20 text-accent-foreground px-2 py-1 rounded-full" data-bind="product.stock">In Stock</span>
+                                </div>
+                                <button class="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fas fa-info-circle mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 2 -->
+                        <div class="product-card bg-card rounded-lg shadow-md hover-lift overflow-hidden" data-category="smartphones">
+                            <!-- Samsung Galaxy smartphone with modern design -->
+                            <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="Samsung Galaxy S24" class="w-full h-48 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-foreground mb-2" data-bind="product.name">Samsung Galaxy S24</h3>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="product.description">Flagship Android phone with AI features, excellent camera, and 5G connectivity</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xl font-bold text-primary" data-bind="product.price">38,500 ETB</span>
+                                    <span class="text-xs bg-accent/20 text-accent-foreground px-2 py-1 rounded-full" data-bind="product.stock">In Stock</span>
+                                </div>
+                                <button class="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fas fa-info-circle mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 3 -->
+                        <div class="product-card bg-card rounded-lg shadow-md hover-lift overflow-hidden" data-category="tablets">
+                            <!-- Modern tablet device -->
+                            <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="iPad Air" class="w-full h-48 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-foreground mb-2" data-bind="product.name">iPad Air 11"</h3>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="product.description">Powerful tablet with M2 chip, perfect for work and entertainment</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xl font-bold text-primary" data-bind="product.price">28,000 ETB</span>
+                                    <span class="text-xs bg-destructive/20 text-destructive px-2 py-1 rounded-full" data-bind="product.stock">Low Stock</span>
+                                </div>
+                                <button class="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fas fa-info-circle mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 4 -->
+                        <div class="product-card bg-card rounded-lg shadow-md hover-lift overflow-hidden" data-category="accessories">
+                            <!-- Wireless earbuds/headphones -->
+                            <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="AirPods Pro" class="w-full h-48 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-foreground mb-2" data-bind="product.name">AirPods Pro 2</h3>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="product.description">Premium wireless earbuds with noise cancellation and spatial audio</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xl font-bold text-primary" data-bind="product.price">12,500 ETB</span>
+                                    <span class="text-xs bg-accent/20 text-accent-foreground px-2 py-1 rounded-full" data-bind="product.stock">In Stock</span>
+                                </div>
+                                <button class="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fas fa-info-circle mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 5 -->
+                        <div class="product-card bg-card rounded-lg shadow-md hover-lift overflow-hidden" data-category="smartphones">
+                            <!-- Google Pixel smartphone -->
+                            <img src="https://images.unsplash.com/photo-1585060544812-6b45742d762f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="Google Pixel 8" class="w-full h-48 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-foreground mb-2" data-bind="product.name">Google Pixel 8</h3>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="product.description">Pure Android experience with incredible camera AI and Google features</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xl font-bold text-primary" data-bind="product.price">32,000 ETB</span>
+                                    <span class="text-xs bg-accent/20 text-accent-foreground px-2 py-1 rounded-full" data-bind="product.stock">In Stock</span>
+                                </div>
+                                <button class="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fas fa-info-circle mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 6 -->
+                        <div class="product-card bg-card rounded-lg shadow-md hover-lift overflow-hidden" data-category="accessories">
+                            <!-- Smartwatch -->
+                            <img src="https://pixabay.com/get/gab44e8e50ca3ed65f7a2fe8069a44ea8d1abb189363512d3ac95671ce36ce0f8041251dfe696497d378a63796f9e8c559a381987456db4586df0c347189fcee9_1280.jpg" alt="Apple Watch Series 9" class="w-full h-48 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-foreground mb-2" data-bind="product.name">Apple Watch Series 9</h3>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="product.description">Advanced smartwatch with health monitoring and fitness tracking</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xl font-bold text-primary" data-bind="product.price">18,000 ETB</span>
+                                    <span class="text-xs bg-accent/20 text-accent-foreground px-2 py-1 rounded-full" data-bind="product.stock">In Stock</span>
+                                </div>
+                                <button class="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fas fa-info-circle mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 7 -->
+                        <div class="product-card bg-card rounded-lg shadow-md hover-lift overflow-hidden" data-category="tablets">
+                            <!-- Samsung tablet -->
+                            <img src="https://images.unsplash.com/photo-1609081219090-a6d81d3085bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="Samsung Galaxy Tab S9" class="w-full h-48 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-foreground mb-2" data-bind="product.name">Galaxy Tab S9</h3>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="product.description">Premium Android tablet with S Pen, perfect for productivity and creativity</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xl font-bold text-primary" data-bind="product.price">25,500 ETB</span>
+                                    <span class="text-xs bg-accent/20 text-accent-foreground px-2 py-1 rounded-full" data-bind="product.stock">In Stock</span>
+                                </div>
+                                <button class="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fas fa-info-circle mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 8 -->
+                        <div class="product-card bg-card rounded-lg shadow-md hover-lift overflow-hidden" data-category="accessories">
+                            <!-- Gaming headset -->
+                            <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="Gaming Headset" class="w-full h-48 object-cover" data-mock-image="true" />
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold text-foreground mb-2" data-bind="product.name">Pro Gaming Headset</h3>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="product.description">High-quality gaming headset with surround sound and clear microphone</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xl font-bold text-primary" data-bind="product.price">8,500 ETB</span>
+                                    <span class="text-xs bg-accent/20 text-accent-foreground px-2 py-1 rounded-full" data-bind="product.stock">In Stock</span>
+                                </div>
+                                <button class="w-full mt-3 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                    <i class="fas fa-info-circle mr-2"></i>View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </section>
+            <!-- @END_COMPONENT: FeaturedProducts -->
+
+            <!-- @COMPONENT: AboutSection [Business information] -->
+            <section id="about" class="py-16 bg-muted">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6">About Nur Mobile</h2>
+                            <p class="text-muted-foreground text-lg mb-6">
+                                With over 5 years of experience in the electronics industry, Nur Mobile has become the trusted destination for premium smartphones and electronics in Ethiopia. We pride ourselves on offering authentic products with competitive prices and exceptional customer service.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-primary">500+</div>
+                                    <div class="text-muted-foreground">Happy Customers</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-primary">1000+</div>
+                                    <div class="text-muted-foreground">Products Sold</div>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex items-center text-muted-foreground">
+                                    <i class="fas fa-shield-alt text-primary mr-2"></i>
+                                    Authentic Products
+                                </div>
+                                <div class="flex items-center text-muted-foreground">
+                                    <i class="fas fa-tools text-primary mr-2"></i>
+                                    Expert Support
+                                </div>
+                                <div class="flex items-center text-muted-foreground">
+                                    <i class="fas fa-shipping-fast text-primary mr-2"></i>
+                                    Fast Delivery
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- Modern electronics store interior -->
+                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400" alt="Nur Mobile Store" class="rounded-lg shadow-lg w-full" data-mock-image="true" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- @END_COMPONENT: AboutSection -->
+
+            <!-- @COMPONENT: ContactSection [Contact information] -->
+            <section id="contact" class="py-16 bg-background">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Get in Touch</h2>
+                        <p class="text-muted-foreground text-lg">Visit our store or contact us for the best deals on electronics</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-foreground mb-2">Location</h3>
+                            <p class="text-muted-foreground" data-mock="true">Bole Road, Addis Ababa<br>Near Edna Mall</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-phone text-primary text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-foreground mb-2">Phone</h3>
+                            <p class="text-muted-foreground" data-mock="true">+251 911 123 456<br>+251 911 654 321</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-envelope text-primary text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-foreground mb-2">Email</h3>
+                            <p class="text-muted-foreground" data-mock="true">info@nurmobile.et<br>sales@nurmobile.et</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- @END_COMPONENT: ContactSection -->
+        </div>
+        <!-- @END_COMPONENT: MainContent -->
+
+        <!-- @COMPONENT: AdminLoginModal [Admin authentication modal] -->
+        <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-card p-8 rounded-lg shadow-xl max-w-md w-full mx-4">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-foreground">Admin Login</h2>
+                    <p class="text-muted-foreground">Access your product management dashboard</p>
+                </div>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-foreground mb-2">Email</label>
+                        <input type="email" id="loginEmail" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background" placeholder="admin@nurmobile.et" data-implementation="Connect to Supabase auth" />
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-foreground mb-2">Password</label>
+                        <input type="password" id="loginPassword" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background" placeholder="••••••••" data-implementation="Connect to Supabase auth" />
+                    </div>
+                    <div class="flex space-x-4">
+                        <button type="submit" class="flex-1 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Login
+                        </button>
+                        <button type="button" id="cancelLoginBtn" class="flex-1 bg-secondary text-secondary-foreground py-2 rounded-md hover:bg-secondary/90 transition-colors">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: AdminLoginModal -->
+
+        <!-- @COMPONENT: AdminDashboard [Admin management interface] -->
+        <div id="adminDashboard" class="hidden">
+            <!-- Admin Navigation -->
+            <nav class="bg-card border-b border-border shadow-sm">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-16">
+                        <div class="flex items-center">
+                            <h1 class="text-2xl font-bold text-primary">Nur Mobile Admin</h1>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <span class="text-muted-foreground">Welcome, Admin</span>
+                            <button id="logoutBtn" class="bg-destructive text-destructive-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-destructive/90 transition-colors">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="flex min-h-screen bg-background">
+                <!-- Sidebar -->
+                <div class="w-64 bg-card border-r border-border">
+                    <div class="p-4">
+                        <nav class="space-y-2">
+                            <a href="#" data-section="dashboard" class="admin-nav-link bg-primary text-primary-foreground flex items-center px-4 py-2 rounded-md">
+                                <i class="fas fa-chart-bar mr-3"></i>Dashboard
+                            </a>
+                            <a href="#" data-section="products" class="admin-nav-link text-muted-foreground hover:bg-secondary flex items-center px-4 py-2 rounded-md">
+                                <i class="fas fa-mobile-alt mr-3"></i>Products
+                            </a>
+                            <a href="#" data-section="inventory" class="admin-nav-link text-muted-foreground hover:bg-secondary flex items-center px-4 py-2 rounded-md">
+                                <i class="fas fa-boxes mr-3"></i>Inventory
+                            </a>
+                            <a href="#" data-section="sales" class="admin-nav-link text-muted-foreground hover:bg-secondary flex items-center px-4 py-2 rounded-md">
+                                <i class="fas fa-chart-line mr-3"></i>Sales
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="flex-1 p-6">
+                    <!-- @COMPONENT: DashboardOverview [Analytics dashboard] -->
+                    <div id="dashboardSection" class="admin-section">
+                        <div class="mb-6">
+                            <h2 class="text-2xl font-bold text-foreground">Dashboard Overview</h2>
+                            <p class="text-muted-foreground">Monitor your business performance and analytics</p>
+                        </div>
+
+                        <!-- KPI Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Total Products</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="analytics.totalProducts">47</p>
+                                    </div>
+                                    <div class="bg-primary/10 p-3 rounded-full">
+                                        <i class="fas fa-mobile-alt text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Stock Value</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="analytics.stockValue">1,250,000 ETB</p>
+                                    </div>
+                                    <div class="bg-chart-1/10 p-3 rounded-full">
+                                        <i class="fas fa-coins text-chart-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Sales This Month</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="analytics.monthlySales">23</p>
+                                    </div>
+                                    <div class="bg-chart-3/10 p-3 rounded-full">
+                                        <i class="fas fa-chart-line text-chart-3"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Revenue</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="analytics.revenue">785,500 ETB</p>
+                                    </div>
+                                    <div class="bg-chart-4/10 p-3 rounded-full">
+                                        <i class="fas fa-money-bill-wave text-chart-4"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Section -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <h3 class="text-lg font-semibold text-foreground mb-4">Sales Trend</h3>
+                                <div class="chart-container bg-muted/30 rounded flex items-center justify-center">
+                                    <p class="text-muted-foreground"><!-- CHART: Sales trend line chart using Chart.js --></p>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <h3 class="text-lg font-semibold text-foreground mb-4">Product Categories</h3>
+                                <div class="chart-container bg-muted/30 rounded flex items-center justify-center">
+                                    <p class="text-muted-foreground"><!-- CHART: Product categories pie chart using Chart.js --></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: DashboardOverview -->
+
+                    <!-- @COMPONENT: ProductManagement [Product CRUD interface] -->
+                    <div id="productsSection" class="admin-section hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-foreground">Product Management</h2>
+                                <p class="text-muted-foreground">Add, edit, and manage your product inventory</p>
+                            </div>
+                            <button id="addProductBtn" class="bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Add Product
+                            </button>
+                        </div>
+
+                        <!-- Product List Table -->
+                        <div class="bg-card rounded-lg shadow-sm border border-border overflow-hidden">
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-muted">
+                                        <tr>
+                                            <th class="text-left p-4 font-medium text-foreground">Product</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Category</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Price</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Stock</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Status</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-border">
+                                        <!-- @MAP: products.map(product => ( -->
+                                        <tr>
+                                            <td class="p-4">
+                                                <div class="flex items-center">
+                                                    <div class="w-10 h-10 bg-muted rounded mr-3"></div>
+                                                    <div>
+                                                        <div class="font-medium text-foreground" data-bind="product.name">iPhone 15 Pro</div>
+                                                        <div class="text-sm text-muted-foreground" data-bind="product.sku">SKU: IPH15P-128</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-4 text-foreground" data-bind="product.category">Smartphones</td>
+                                            <td class="p-4 text-foreground" data-bind="product.price">45,000 ETB</td>
+                                            <td class="p-4 text-foreground" data-bind="product.stock">15</td>
+                                            <td class="p-4">
+                                                <span class="bg-accent/20 text-accent-foreground px-2 py-1 rounded-full text-xs" data-bind="product.status">In Stock</span>
+                                            </td>
+                                            <td class="p-4">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-primary hover:text-primary/80" data-implementation="Edit product functionality">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="text-destructive hover:text-destructive/80" data-implementation="Delete product functionality">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-4">
+                                                <div class="flex items-center">
+                                                    <div class="w-10 h-10 bg-muted rounded mr-3"></div>
+                                                    <div>
+                                                        <div class="font-medium text-foreground" data-bind="product.name">Samsung Galaxy S24</div>
+                                                        <div class="text-sm text-muted-foreground" data-bind="product.sku">SKU: SGS24-256</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="p-4 text-foreground" data-bind="product.category">Smartphones</td>
+                                            <td class="p-4 text-foreground" data-bind="product.price">38,500 ETB</td>
+                                            <td class="p-4 text-foreground" data-bind="product.stock">8</td>
+                                            <td class="p-4">
+                                                <span class="bg-accent/20 text-accent-foreground px-2 py-1 rounded-full text-xs" data-bind="product.status">In Stock</span>
+                                            </td>
+                                            <td class="p-4">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-primary hover:text-primary/80" data-implementation="Edit product functionality">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="text-destructive hover:text-destructive/80" data-implementation="Delete product functionality">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- @END_MAP )) -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: ProductManagement -->
+
+                    <!-- @COMPONENT: InventoryManagement [Stock management] -->
+                    <div id="inventorySection" class="admin-section hidden">
+                        <div class="mb-6">
+                            <h2 class="text-2xl font-bold text-foreground">Inventory Management</h2>
+                            <p class="text-muted-foreground">Monitor stock levels and manage inventory</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Low Stock Items</p>
+                                        <p class="text-2xl font-bold text-destructive" data-bind="inventory.lowStock">3</p>
+                                    </div>
+                                    <div class="bg-destructive/10 p-3 rounded-full">
+                                        <i class="fas fa-exclamation-triangle text-destructive"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Out of Stock</p>
+                                        <p class="text-2xl font-bold text-destructive" data-bind="inventory.outOfStock">1</p>
+                                    </div>
+                                    <div class="bg-destructive/10 p-3 rounded-full">
+                                        <i class="fas fa-times-circle text-destructive"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Total Items</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="inventory.totalItems">247</p>
+                                    </div>
+                                    <div class="bg-primary/10 p-3 rounded-full">
+                                        <i class="fas fa-boxes text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stock Alerts -->
+                        <div class="bg-card rounded-lg shadow-sm border border-border p-6">
+                            <h3 class="text-lg font-semibold text-foreground mb-4">Stock Alerts</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-destructive/10 rounded-lg">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-destructive mr-3"></i>
+                                        <div>
+                                            <div class="font-medium text-foreground" data-bind="alert.product">iPad Air 11"</div>
+                                            <div class="text-sm text-muted-foreground">Only 2 units remaining</div>
+                                        </div>
+                                    </div>
+                                    <button class="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm">Restock</button>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-destructive/10 rounded-lg">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-times-circle text-destructive mr-3"></i>
+                                        <div>
+                                            <div class="font-medium text-foreground" data-bind="alert.product">MacBook Pro 14"</div>
+                                            <div class="text-sm text-muted-foreground">Out of stock</div>
+                                        </div>
+                                    </div>
+                                    <button class="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm">Restock</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: InventoryManagement -->
+
+                    <!-- @COMPONENT: SalesAnalytics [Sales tracking and analytics] -->
+                    <div id="salesSection" class="admin-section hidden">
+                        <div class="mb-6">
+                            <h2 class="text-2xl font-bold text-foreground">Sales Analytics</h2>
+                            <p class="text-muted-foreground">Track sales performance and revenue insights</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Today's Sales</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="sales.today">3</p>
+                                        <p class="text-sm text-chart-3">+15% from yesterday</p>
+                                    </div>
+                                    <div class="bg-chart-3/10 p-3 rounded-full">
+                                        <i class="fas fa-chart-line text-chart-3"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">This Week</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="sales.week">18</p>
+                                        <p class="text-sm text-chart-3">+8% from last week</p>
+                                    </div>
+                                    <div class="bg-chart-1/10 p-3 rounded-full">
+                                        <i class="fas fa-calendar-week text-chart-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">This Month</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="sales.month">67</p>
+                                        <p class="text-sm text-chart-3">+23% from last month</p>
+                                    </div>
+                                    <div class="bg-primary/10 p-3 rounded-full">
+                                        <i class="fas fa-calendar-alt text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-card p-6 rounded-lg shadow-sm border border-border">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-muted-foreground text-sm">Total Revenue</p>
+                                        <p class="text-2xl font-bold text-foreground" data-bind="sales.revenue">2,450,000 ETB</p>
+                                        <p class="text-sm text-chart-3">+31% this year</p>
+                                    </div>
+                                    <div class="bg-chart-4/10 p-3 rounded-full">
+                                        <i class="fas fa-money-bill-wave text-chart-4"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Sales -->
+                        <div class="bg-card rounded-lg shadow-sm border border-border">
+                            <div class="p-6 border-b border-border">
+                                <h3 class="text-lg font-semibold text-foreground">Recent Sales</h3>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-muted">
+                                        <tr>
+                                            <th class="text-left p-4 font-medium text-foreground">Date</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Product</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Customer</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Amount</th>
+                                            <th class="text-left p-4 font-medium text-foreground">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-border">
+                                        <!-- @MAP: recentSales.map(sale => ( -->
+                                        <tr>
+                                            <td class="p-4 text-foreground" data-bind="sale.date">Dec 15, 2024</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.product">iPhone 15 Pro</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.customer">Ahmed K.</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.amount">45,000 ETB</td>
+                                            <td class="p-4">
+                                                <span class="bg-chart-3/20 text-chart-3 px-2 py-1 rounded-full text-xs">Completed</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-4 text-foreground" data-bind="sale.date">Dec 14, 2024</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.product">Samsung Galaxy S24</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.customer">Sarah M.</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.amount">38,500 ETB</td>
+                                            <td class="p-4">
+                                                <span class="bg-chart-3/20 text-chart-3 px-2 py-1 rounded-full text-xs">Completed</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-4 text-foreground" data-bind="sale.date">Dec 14, 2024</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.product">AirPods Pro 2</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.customer">Mohamed A.</td>
+                                            <td class="p-4 text-foreground" data-bind="sale.amount">12,500 ETB</td>
+                                            <td class="p-4">
+                                                <span class="bg-chart-3/20 text-chart-3 px-2 py-1 rounded-full text-xs">Completed</span>
+                                            </td>
+                                        </tr>
+                                        <!-- @END_MAP )) -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: SalesAnalytics -->
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: AdminDashboard -->
+
+        <!-- @COMPONENT: AddProductModal [Product creation form] -->
+        <div id="addProductModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-card p-8 rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-screen overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-foreground">Add New Product</h2>
+                    <button id="closeAddProductBtn" class="text-muted-foreground hover:text-foreground">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <form id="addProductForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-foreground mb-2">Product Name</label>
+                            <input type="text" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background" placeholder="iPhone 15 Pro Max" data-implementation="Connect to Supabase products table" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-2">Category</label>
+                            <select class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background">
+                                <option>Smartphones</option>
+                                <option>Tablets</option>
+                                <option>Accessories</option>
+                                <option>Laptops</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-2">Price (ETB)</label>
+                            <input type="number" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background" placeholder="45000" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-2">Stock Quantity</label>
+                            <input type="number" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background" placeholder="15" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-foreground mb-2">SKU</label>
+                            <input type="text" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background" placeholder="IPH15PM-256" />
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-foreground mb-2">Description</label>
+                            <textarea rows="3" class="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-background" placeholder="Product description..."></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-foreground mb-2">Product Image</label>
+                            <div class="border-2 border-dashed border-border rounded-md p-6 text-center">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-muted-foreground mb-2"></i>
+                                <p class="text-muted-foreground">Click to upload or drag and drop</p>
+                                <input type="file" class="hidden" accept="image/*" data-implementation="Integrate with Supabase Storage" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4 mt-6">
+                        <button type="submit" class="flex-1 bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Add Product
+                        </button>
+                        <button type="button" id="cancelAddProductBtn" class="flex-1 bg-secondary text-secondary-foreground py-2 rounded-md hover:bg-secondary/90 transition-colors">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: AddProductModal -->
+    </div>
+    <!-- @END_COMPONENT: App -->
+
+    <script>
+        // Application state management
+        (function() {
+            let currentUser = null;
+            let currentSection = 'dashboard';
+            
+            // DOM elements
+            const elements = {
+                // Navigation
+                adminLoginBtn: document.getElementById('adminLoginBtn'),
+                mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+                mobileMenu: document.getElementById('mobileMenu'),
+                
+                // Login modal
+                loginModal: document.getElementById('loginModal'),
+                loginForm: document.getElementById('loginForm'),
+                cancelLoginBtn: document.getElementById('cancelLoginBtn'),
+                
+                // Admin dashboard
+                adminDashboard: document.getElementById('adminDashboard'),
+                publicContent: document.getElementById('publicContent'),
+                logoutBtn: document.getElementById('logoutBtn'),
+                
+                // Product management
+                addProductBtn: document.getElementById('addProductBtn'),
+                addProductModal: document.getElementById('addProductModal'),
+                addProductForm: document.getElementById('addProductForm'),
+                closeAddProductBtn: document.getElementById('closeAddProductBtn'),
+                cancelAddProductBtn: document.getElementById('cancelAddProductBtn'),
+            };
+            
+            // Event listeners
+            function initEventListeners() {
+                // Mobile menu toggle
+                elements.mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+                
+                // Admin login
+                elements.adminLoginBtn?.addEventListener('click', showLoginModal);
+                elements.cancelLoginBtn?.addEventListener('click', hideLoginModal);
+                elements.loginForm?.addEventListener('submit', handleLogin);
+                
+                // Admin logout
+                elements.logoutBtn?.addEventListener('click', handleLogout);
+                
+                // Admin navigation
+                document.querySelectorAll('.admin-nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = e.currentTarget.dataset.section;
+                        showAdminSection(section);
+                    });
+                });
+                
+                // Product management
+                elements.addProductBtn?.addEventListener('click', showAddProductModal);
+                elements.closeAddProductBtn?.addEventListener('click', hideAddProductModal);
+                elements.cancelAddProductBtn?.addEventListener('click', hideAddProductModal);
+                elements.addProductForm?.addEventListener('submit', handleAddProduct);
+                
+                // Category filters
+                document.querySelectorAll('.category-filter').forEach(filter => {
+                    filter.addEventListener('click', (e) => {
+                        const category = e.target.dataset.category;
+                        filterProducts(category);
+                        
+                        // Update active state
+                        document.querySelectorAll('.category-filter').forEach(f => {
+                            f.classList.remove('active', 'bg-primary', 'text-primary-foreground');
+                            f.classList.add('text-muted-foreground');
+                        });
+                        e.target.classList.add('active', 'bg-primary', 'text-primary-foreground');
+                        e.target.classList.remove('text-muted-foreground');
+                    });
+                });
+                
+                // Public navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = e.currentTarget.dataset.nav;
+                        scrollToSection(section);
+                        
+                        // Update active nav state
+                        document.querySelectorAll('.nav-link').forEach(l => {
+                            l.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                            l.classList.add('text-muted-foreground');
+                        });
+                        e.currentTarget.classList.add('text-primary', 'border-b-2', 'border-primary');
+                        e.currentTarget.classList.remove('text-muted-foreground');
+                    });
+                });
+                
+                // Close modals on outside click
+                elements.loginModal?.addEventListener('click', (e) => {
+                    if (e.target === elements.loginModal) hideLoginModal();
+                });
+                elements.addProductModal?.addEventListener('click', (e) => {
+                    if (e.target === elements.addProductModal) hideAddProductModal();
+                });
+            }
+            
+            // Functions
+            function toggleMobileMenu() {
+                elements.mobileMenu?.classList.toggle('hidden');
+            }
+            
+            function showLoginModal() {
+                elements.loginModal?.classList.remove('hidden');
+                elements.loginModal?.classList.add('flex');
+            }
+            
+            function hideLoginModal() {
+                elements.loginModal?.classList.add('hidden');
+                elements.loginModal?.classList.remove('flex');
+            }
+            
+            function handleLogin(e) {
+                e.preventDefault();
+                // TODO: Implement Supabase authentication
+                console.log('Login attempt');
+                
+                // Simulate successful login
+                currentUser = { email: 'admin@nurmobile.et', role: 'admin' };
+                showAdminDashboard();
+                hideLoginModal();
+            }
+            
+            function handleLogout() {
+                // TODO: Implement Supabase logout
+                currentUser = null;
+                showPublicContent();
+            }
+            
+            function showAdminDashboard() {
+                elements.publicContent?.classList.add('hidden');
+                elements.adminDashboard?.classList.remove('hidden');
+            }
+            
+            function showPublicContent() {
+                elements.adminDashboard?.classList.add('hidden');
+                elements.publicContent?.classList.remove('hidden');
+            }
+            
+            function showAdminSection(section) {
+                // Hide all sections
+                document.querySelectorAll('.admin-section').forEach(s => {
+                    s.classList.add('hidden');
+                });
+                
+                // Show selected section
+                const targetSection = document.getElementById(section + 'Section');
+                targetSection?.classList.remove('hidden');
+                
+                // Update navigation
+                document.querySelectorAll('.admin-nav-link').forEach(link => {
+                    link.classList.remove('bg-primary', 'text-primary-foreground');
+                    link.classList.add('text-muted-foreground');
+                });
+                
+                const activeLink = document.querySelector(`[data-section="${section}"]`);
+                activeLink?.classList.add('bg-primary', 'text-primary-foreground');
+                activeLink?.classList.remove('text-muted-foreground');
+                
+                currentSection = section;
+            }
+            
+            function showAddProductModal() {
+                elements.addProductModal?.classList.remove('hidden');
+                elements.addProductModal?.classList.add('flex');
+            }
+            
+            function hideAddProductModal() {
+                elements.addProductModal?.classList.add('hidden');
+                elements.addProductModal?.classList.remove('flex');
+            }
+            
+            function handleAddProduct(e) {
+                e.preventDefault();
+                // TODO: Implement product creation with Supabase
+                console.log('Add product');
+                hideAddProductModal();
+            }
+            
+            function filterProducts(category) {
+                const productCards = document.querySelectorAll('.product-card');
+                productCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            function scrollToSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                section?.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Initialize application
+            function init() {
+                initEventListeners();
+                
+                // Set initial state
+                showPublicContent();
+                
+                console.log('Nur Mobile application initialized');
+            }
+            
+            // Start application when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>

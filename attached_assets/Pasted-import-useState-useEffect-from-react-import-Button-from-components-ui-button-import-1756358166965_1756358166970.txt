@@ -1,0 +1,211 @@
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Product } from "./ProductCard";
+
+interface ProductFormProps {
+  product?: Product;
+  onSubmit: (product: Omit<Product, 'id'>) => void;
+  onCancel: () => void;
+}
+
+const ProductForm = ({ product, onSubmit, onCancel }: ProductFormProps) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    brand: '',
+    price: 0,
+    category: '',
+    imageUrl: '',
+    inStock: true,
+    description: '',
+    specifications: {} as { [key: string]: string }
+  });
+
+  const [specKey, setSpecKey] = useState('');
+  const [specValue, setSpecValue] = useState('');
+
+  useEffect(() => {
+    if (product) {
+      setFormData({
+        name: product.name,
+        brand: product.brand,
+        price: product.price,
+        category: product.category,
+        imageUrl: product.imageUrl,
+        inStock: product.inStock,
+        description: product.description,
+        specifications: product.specifications
+      });
+    }
+  }, [product]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
+  const addSpecification = () => {
+    if (specKey && specValue) {
+      setFormData(prev => ({
+        ...prev,
+        specifications: {
+          ...prev.specifications,
+          [specKey]: specValue
+        }
+      }));
+      setSpecKey('');
+      setSpecValue('');
+    }
+  };
+
+  const removeSpecification = (key: string) => {
+    setFormData(prev => ({
+      ...prev,
+      specifications: Object.fromEntries(
+        Object.entries(prev.specifications).filter(([k]) => k !== key)
+      )
+    }));
+  };
+
+  return (
+    <Card className="w-full max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle>{product ? 'Edit Product' : 'Add New Product'}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="name">Product Name</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="brand">Brand</Label>
+              <Input
+                id="brand"
+                value={formData.brand}
+                onChange={(e) => setFormData(prev => ({ ...prev, brand: e.target.value }))}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="price">Price ($)</Label>
+              <Input
+                id="price"
+                type="number"
+                value={formData.price}
+                onChange={(e) => setFormData(prev => ({ ...prev, price: parseFloat(e.target.value) || 0 }))}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="category">Category</Label>
+              <Select value={formData.category} onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Smartphone">Smartphone</SelectItem>
+                  <SelectItem value="Tablet">Tablet</SelectItem>
+                  <SelectItem value="Laptop">Laptop</SelectItem>
+                  <SelectItem value="Headphones">Headphones</SelectItem>
+                  <SelectItem value="Smart Watch">Smart Watch</SelectItem>
+                  <SelectItem value="Accessories">Accessories</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div>
+            <Label htmlFor="imageUrl">Image URL</Label>
+            <Input
+              id="imageUrl"
+              value={formData.imageUrl}
+              onChange={(e) => setFormData(prev => ({ ...prev, imageUrl: e.target.value }))}
+              placeholder="https://example.com/image.jpg"
+              required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              id="description"
+              value={formData.description}
+              onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+              rows={3}
+              required
+            />
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="inStock"
+              checked={formData.inStock}
+              onCheckedChange={(checked) => setFormData(prev => ({ ...prev, inStock: checked }))}
+            />
+            <Label htmlFor="inStock">In Stock</Label>
+          </div>
+
+          <div>
+            <Label>Specifications</Label>
+            <div className="flex gap-2 mb-2">
+              <Input
+                placeholder="Specification name"
+                value={specKey}
+                onChange={(e) => setSpecKey(e.target.value)}
+              />
+              <Input
+                placeholder="Value"
+                value={specValue}
+                onChange={(e) => setSpecValue(e.target.value)}
+              />
+              <Button type="button" onClick={addSpecification} variant="outline">
+                Add
+              </Button>
+            </div>
+            <div className="space-y-1">
+              {Object.entries(formData.specifications).map(([key, value]) => (
+                <div key={key} className="flex justify-between items-center bg-muted p-2 rounded">
+                  <span><strong>{key}:</strong> {value}</span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => removeSpecification(key)}
+                  >
+                    Remove
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <Button type="submit" className="flex-1">
+              {product ? 'Update Product' : 'Add Product'}
+            </Button>
+            <Button type="button" variant="outline" onClick={onCancel}>
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default ProductForm;
