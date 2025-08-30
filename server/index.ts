@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// --- Logging middleware (optional) ---
+// --- Logging middleware ---
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -31,16 +31,16 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  const server = await registerRoutes(app); // register API routes first
+  const server = await registerRoutes(app); // register API routes
 
   if (process.env.NODE_ENV === "development") {
-    await setupVite(app, server); // dev mode with Vite HMR
+    await setupVite(app, server); // dev with Vite HMR
   } else {
-    serveStatic(app); // production static build
+    serveStatic(app); // serve client/dist in production
   }
 
   const port = parseInt(process.env.PORT || "5000", 10);
-  const host = process.platform === "win32" ? "127.0.0.1" : "0.0.0.0";
+  const host = "0.0.0.0"; // required for Render
 
   server.listen({ port, host }, () => {
     console.log(`🚀 Server running at http://${host}:${port}`);
